@@ -1,0 +1,37 @@
+#lang r5rs
+
+(define (foo n)
+                   (if (> n 20140000)
+                       (begin
+                         (display "foo")
+                         (display n))
+                       (bar (+ n 1))))
+                  (define (bar n)
+                    (if (> n 20130000)
+                        (begin
+                          (display "bar")
+                          (display n))
+                        (foo (+ n 2))))
+                  (display (foo 1234))
+
+(define call/cc call-with-current-continuation)
+
+(define program '((define (foo n)
+                   (if (> n 20140000)
+                       (begin
+                         (display "foo")
+                         (display n))
+                       (bar (+ n 1))))
+                  (define (bar n)
+                    (if (> n 20130000)
+                        (begin
+                          (display "bar")
+                          (display n))
+                        (foo (+ n 2))))
+                  (display (foo 1234))))
+
+(define (find-tail-rec program)
+  ;; 找到一段程序中的所有尾递归
+  "hello")
+
+(eval (car program) (scheme-report-environment 5))
