@@ -1,4 +1,12 @@
-#lang racket
+;; #lang racket
+
+(define null #nil)
+(define (last l)
+  (cond ((null? (cdr l)) (car l))
+        (else (last (cdr l)))))
+
+(define (empty? l)
+  (null? l))
 
 ;; 这里是示例代码，这段代码在Scheme中是可以执行的，因为Scheme标准规定了需要尾递归优化
 ;; 而对应的JavaScript代码是无法运行的，因为没有做尾递归优化，很快就超过最大调用深度了
@@ -194,6 +202,7 @@
 
 (define (println . args)
   (begin
+    
     (map (lambda (x) (display x)) args)
     null))
 
